@@ -41,6 +41,9 @@
 using namespace std;
 using namespace cv;
 
+const char* cloudTopic = "filtered_cloud";
+const char* outputFrame = "/lidar_localisation_front"; // "/map"
+double cubeSize = 1.0;
 
 ros::Publisher objID_pub;
 
@@ -247,8 +250,8 @@ void KFT(const std_msgs::Float32MultiArray ccs)
 
         m.id=i;
         m.type=visualization_msgs::Marker::CUBE;
-        m.header.frame_id="/map";
-        m.scale.x=0.3;         m.scale.y=0.3;         m.scale.z=0.3;
+        m.header.frame_id=outputFrame;
+        m.scale.x=cubeSize;         m.scale.y=cubeSize;         m.scale.z=cubeSize;
         m.action=visualization_msgs::Marker::ADD;
         m.color.a=1.0;
         m.color.r=i%2?1:0;
@@ -331,7 +334,7 @@ if (!(meas5[0]==0.0f || meas5[1]==0.0f))
 void publish_cloud(ros::Publisher& pub, pcl::PointCloud<pcl::PointXYZ>::Ptr cluster){
   sensor_msgs::PointCloud2::Ptr clustermsg (new sensor_msgs::PointCloud2);
   pcl::toROSMsg (*cluster , *clustermsg);
-  clustermsg->header.frame_id = "/map";
+  clustermsg->header.frame_id = outputFrame;
   clustermsg->header.stamp = ros::Time::now();
   pub.publish (*clustermsg);
 
@@ -715,7 +718,7 @@ int main(int argc, char** argv)
 cout<<"About to setup callback\n";
 
 // Create a ROS subscriber for the input point cloud
-  ros::Subscriber sub = nh.subscribe ("filtered_cloud", 1, cloud_cb);
+  ros::Subscriber sub = nh.subscribe (cloudTopic, 1, cloud_cb);
   // Create a ROS publisher for the output point cloud
   pub_cluster0 = nh.advertise<sensor_msgs::PointCloud2> ("cluster_0", 1);
   pub_cluster1 = nh.advertise<sensor_msgs::PointCloud2> ("cluster_1", 1);
