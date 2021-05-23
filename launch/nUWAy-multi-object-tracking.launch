@@ -3,8 +3,8 @@
     <node pkg="rviz" type="rviz" name="rviz" args="-d /home/jai/catkin_ws/src/multiple-object-tracking-lidar/nuway_objects.rviz"/>
 
     <node name="kf_tracker" pkg="multi_object_tracking_lidar" type="kf_tracker" >
-        <param name="cloud_topic" value="/lidar_localisation/front/cloud" />
-        <param name="output_frame" value="/lidar_localisation_front" />
+        <param name="cloud_topic" value="/scan_matched_points2" />
+        <param name="output_frame" value="/map" />
         <param name="cube_size" value="1.0" />
     </node>
 </launch>
