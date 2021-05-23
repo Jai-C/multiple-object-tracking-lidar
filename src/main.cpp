@@ -41,11 +41,6 @@
 using namespace std;
 using namespace cv;
 
-// TODO: change to ROS_PARAMS
-//const char* cloudTopic = "filtered_cloud";
-//const char* outputFrame = "/lidar_localisation_front"; // "/map"
-//double cubeSize = 1.0; // 0.3
-
 std::string cloudTopic;
 std::string outputFrame;
 double cubeSize;
@@ -716,22 +711,22 @@ int main(int argc, char** argv)
     ros::NodeHandle nh;
 
     // Parameters
-    if (nh.getParam("cloud_topic", cloudTopic)) {
+    if (nh.getParam("/kf_tracker/cloud_topic", cloudTopic)) {
         ROS_INFO("Got param: %s", cloudTopic.c_str());
     }
     else {
         ROS_ERROR("Failed to get param 'cloud_topic'");
     }
 
-    if (nh.getParam("output_frame", outputFrame)) {
+    if (nh.getParam("/kf_tracker/output_frame", outputFrame)) {
         ROS_INFO("Got param: %s", outputFrame.c_str());
     }
     else {
         ROS_ERROR("Failed to get param 'output_frame'");
     }
 
-    if (nh.getParam("cube_size", cubeSize)) {
-        ROS_INFO("Got param: %d", cubeSize);
+    if (nh.getParam("/kf_tracker/cube_size", cubeSize)) {
+        ROS_INFO("Got param: %e", cubeSize);
     }
     else {
         ROS_WARN("Failed to get param 'cube_size'");
