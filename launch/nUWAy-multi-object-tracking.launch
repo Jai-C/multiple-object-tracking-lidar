@@ -1,8 +1,7 @@
 <launch>
     <node pkg="rosbag" type="play" name="player" output="log" args="-l /home/jai/catkin_ws/ros-bags/10MayCampus.bag" />
-    <node pkg="rviz" type="rviz" name="rviz" args="-d /home/jai/catkin_ws/nuway_objects.rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz" args="-d /home/jai/catkin_ws/src/multiple-object-tracking-lidar/nuway_objects.rviz"/>
 
-    <!-- <remap from="/lidar_localisation/front/cloud" to="/filtered_cloud" /> -->
     <node name="kf_tracker" pkg="multi_object_tracking_lidar" type="kf_tracker" >
         <param name="cloud_topic" value="/lidar_localisation/front/cloud" />
         <param name="output_frame" value="/lidar_localisation_front" />
