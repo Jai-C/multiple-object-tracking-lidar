@@ -5,8 +5,6 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
-        - /PointCloud21
-        - /Path1
       Splitter Ratio: 0.5
     Tree Height: 500
   - Class: rviz/Selection
@@ -28,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud2
+    SyncSource: /scan_all
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -350,8 +348,6 @@ Visualization Manager:
           Value: true
         odom:
           Value: true
-        velodyne:
-          Value: true
         xsens_imu:
           Value: true
       Marker Scale: 1
@@ -360,34 +356,33 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        velodyne:
-          map:
-            odom:
-              base_link:
-                camera_front:
-                  {}
-                camera_rear:
-                  {}
-                gps:
-                  {}
-                lidar_localisation_front:
-                  {}
-                lidar_localisation_rear:
-                  {}
-                lidar_safety_front_left:
-                  {}
-                lidar_safety_front_right:
-                  {}
-                lidar_safety_rear_left:
-                  {}
-                lidar_safety_rear_right:
-                  {}
-                lidar_velodyne_front:
-                  {}
-                lidar_velodyne_rear:
-                  {}
-                xsens_imu:
-                  {}
+        map:
+          odom:
+            base_link:
+              camera_front:
+                {}
+              camera_rear:
+                {}
+              gps:
+                {}
+              lidar_localisation_front:
+                {}
+              lidar_localisation_rear:
+                {}
+              lidar_safety_front_left:
+                {}
+              lidar_safety_front_right:
+                {}
+              lidar_safety_rear_left:
+                {}
+              lidar_safety_rear_right:
+                {}
+              lidar_velodyne_front:
+                {}
+              lidar_velodyne_rear:
+                {}
+              xsens_imu:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 1
@@ -469,12 +464,12 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: true
+      Enabled: false
       Invert Rainbow: true
       Max Color: 255; 0; 255
-      Max Intensity: 18.05830192565918
+      Max Intensity: 26.266353607177734
       Min Color: 0; 0; 0
-      Min Intensity: -63.237953186035156
+      Min Intensity: -65.23748016357422
       Name: PointCloud2
       Position Transformer: XYZ
       Queue Size: 10
@@ -486,7 +481,7 @@ Visualization Manager:
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
@@ -536,7 +531,6 @@ Visualization Manager:
       Name: Marker
       Namespaces:
         desired_direction_new: true
-        waypoint: true
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -557,12 +551,62 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
-    - Class: rviz/MarkerArray
+    - Alpha: 1
+      Autocompute Intensity Bounds: true
+      Autocompute Value Bounds:
+        Max Value: 2.5073204040527344
+        Min Value: -2.490729808807373
+        Value: true
+      Axis: Z
+      Channel Name: x
+      Class: rviz/LaserScan
+      Color: 255; 255; 255
+      Color Transformer: Intensity
+      Decay Time: 0
       Enabled: true
+      Invert Rainbow: false
+      Max Color: 0; 0; 255
+      Max Intensity: -9.647709846496582
+      Min Color: 0; 0; 255
+      Min Intensity: -44.319114685058594
+      Name: /scan_all
+      Position Transformer: XYZ
+      Queue Size: 10
+      Selectable: true
+      Size (Pixels): 3
+      Size (m): 0.20000000298023224
+      Style: Flat Squares
+      Topic: /scan_all
+      Unreliable: false
+      Use Fixed Frame: true
+      Use rainbow: true
+      Value: true
+    - Class: rviz/MarkerArray
+      Enabled: false
       Marker Topic: /viz
-      Name: MarkerArray
+      Name: Multi_object_detection
       Namespaces:
         {}
+      Queue Size: 100
+      Value: false
+    - Class: rviz/MarkerArray
+      Enabled: true
+      Marker Topic: /datmo/marker_array
+      Name: DATMO_MarkerArray
+      Namespaces:
+        L-Shapes: true
+        bounding_box_center: true
+        bounding_boxes: true
+        box_models_kf: true
+        boxes: true
+        closest_corner: true
+        clustered_points: true
+        clusters: true
+        lines: true
+        thetaBox: true
+        thetaL1: true
+        thetaL2: true
+        velocities: true
       Queue Size: 100
       Value: true
   Enabled: true
@@ -593,7 +637,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 72.4932632446289
+      Distance: 76.41886901855469
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -608,10 +652,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 1.1947962045669556
       Target Frame: base_link
       Value: Orbit (rviz)
-      Yaw: 5.543183326721191
+      Yaw: 4.828181743621826
     Saved:
       - Angle: 0
         Class: rviz/TopDownOrtho
