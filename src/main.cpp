@@ -41,9 +41,15 @@
 using namespace std;
 using namespace cv;
 
-const char* cloudTopic = "filtered_cloud";
-const char* outputFrame = "/lidar_localisation_front"; // "/map"
-double cubeSize = 1.0;
+// TODO: change to ROS_PARAMS
+//const char* cloudTopic = "filtered_cloud";
+//const char* outputFrame = "/lidar_localisation_front"; // "/map"
+//double cubeSize = 1.0; // 0.3
+
+std::string cloudTopic;
+std::string outputFrame;
+double cubeSize;
+
 
 ros::Publisher objID_pub;
 
@@ -708,6 +714,29 @@ int main(int argc, char** argv)
     // ROS init
     ros::init (argc,argv,"kf_tracker");
     ros::NodeHandle nh;
+
+    // Parameters
+    if (nh.getParam("cloud_topic", cloudTopic)) {
+        ROS_INFO("Got param: %s", cloudTopic.c_str());
+    }
+    else {
+        ROS_ERROR("Failed to get param 'cloud_topic'");
+    }
+
+    if (nh.getParam("output_frame", outputFrame)) {
+        ROS_INFO("Got param: %s", outputFrame.c_str());
+    }
+    else {
+        ROS_ERROR("Failed to get param 'output_frame'");
+    }
+
+    if (nh.getParam("cube_size", cubeSize)) {
+        ROS_INFO("Got param: %d", cubeSize);
+    }
+    else {
+        ROS_WARN("Failed to get param 'cube_size'");
+        cubeSize = 1.0; // Default
+    }
 
    
     // Publishers to publish the state of the objects (pos and vel)
